@@ -1,6 +1,6 @@
 {
-  "name": "Lámpara Bíblica",
-  "short_name": "Lámpara",
+  "name": "Ner Bible",
+  "short_name": "Ner",
   "description": "Aprende y memoriza la Biblia (Reina-Valera 1960).",
   "lang": "es",
   "start_url": "./",
