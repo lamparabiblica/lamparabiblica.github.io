@@ -488,6 +488,7 @@ a.btn:not(.primary){color:var(--ink)}
 #intro .glow{position:absolute;left:50%;top:50%;width:40px;height:40px;margin:-62px 0 0 -20px;border-radius:50%;background:radial-gradient(circle,#FFE08A 0%,#FFB020 45%,rgba(255,176,32,0) 70%);transform:scale(0);opacity:0;z-index:1;animation:glowUp .9s 1s cubic-bezier(.5,0,.3,1) forwards}
 #intro .fill{position:absolute;left:50%;top:50%;width:60px;height:60px;margin:-72px 0 0 -30px;border-radius:50%;background:radial-gradient(circle,#FFE7A3 0%,#FFB020 55%,#FF9A10 100%);transform:scale(0);z-index:3;animation:fillUp .75s 1.35s cubic-bezier(.6,0,.3,1) forwards}
 #intro .word{position:absolute;left:0;right:0;top:calc(50% + 78px);text-align:center;font-weight:800;font-size:26px;letter-spacing:-.03em;color:var(--ink);opacity:0;z-index:2;animation:wordIn .5s .7s ease forwards}
+#intro .word.sub{top:calc(50% + 116px);font-size:15px;font-weight:600;letter-spacing:0;opacity:0;animation-delay:1s}
 #intro.out{animation:introOut .45s ease forwards}
 @keyframes lampIn{from{opacity:0;transform:translateY(14px) scale(.92)}to{opacity:1;transform:none}}
 @keyframes flameOn{to{transform:scale(1)}}
@@ -3490,7 +3491,7 @@ function applyTheme(t){ try{ if(t==="light"||t==="dark") document.documentElemen
 /* ---------- Pantallas de bienvenida ---------- */
 let WEL = { step:0, migrate:null, pending:null, goal:10, err:"" };
 const SLIDES = [
-  { h:`Guarda la Palabra <em>en tu corazón.</em>`, p:"Memoriza los versículos más importantes de la Reina-Valera 1960, a tu ritmo y sin perder lo que ya aprendiste.",
+  { h:`Guarda la Palabra <em>en tu corazón.</em>`, p:"Memoriza los versículos más importantes de la Reina-Valera 1960, a tu ritmo y sin perder lo que ya aprendiste. Ner (<bdi lang='he'>נֵר</bdi>) significa «lámpara» en hebreo: «Lámpara es a mis pies tu palabra».",
     v:()=>`<div class="slide-visual"><span class="eyebrow">Salmos 119:11</span><p class="verse-text" style="font-size:22px">“En mi corazón he guardado tus dichos, para no pecar contra ti.”</p></div>` },
   { h:`Un método que <em>se adapta a ti.</em>`, p:"Repasas con tarjetas y luego practicas de tres formas. Lo que más te cuesta vuelve antes; lo que dominas, espaciado.",
     v:()=>`<div class="slide-visual"><div class="mini-blank">Jehová es mi <span></span>; nada me <span></span>.</div><div class="mini-steps"><div><b>Llenar espacios</b><small>completa palabras</small></div><div><b>Escribir</b><small>con tildes y signos</small></div><div><b>Recitar</b><small>en voz alta</small></div><div><b>Cita</b><small>libro, capítulo, versículo</small></div></div></div>` },
@@ -3499,7 +3500,7 @@ const SLIDES = [
 ];
 function welArt(){
   return `<aside class="wel-art"><div class="brand" style="padding:0;position:relative;z-index:1"><div class="brand-mark">${I.lamp}</div><div><b style="color:var(--bg)">Ner</b><small style="color:inherit;opacity:.6">REINA-VALERA 1960</small></div></div>
-    <p class="big-quote">“Lámpara es a mis pies tu palabra, <em>y lumbrera a mi camino.</em>”</p><span class="src">SALMOS 119:105</span><small style="position:relative;z-index:1;opacity:.75;font-size:12px;line-height:1.4">Ner (נֵר) significa «lámpara» en hebreo.</small></aside>`;
+    <p class="big-quote">“Lámpara es a mis pies tu palabra, <em>y lumbrera a mi camino.</em>”</p><span class="src">SALMOS 119:105</span></aside>`;
 }
 function pwField(id, ph, auto){ return `<div class="pw"><input class="input" id="${id}" type="password" placeholder="${ph}" autocomplete="${auto}" minlength="6" required><button type="button" data-act="toggle-pw" data-for="${id}">Mostrar</button></div>`; }
 function renderWelcome(){
@@ -4042,7 +4043,7 @@ function playIntro(force){
   if(!force && (seen || !introEnabled())) return;
   const old = $("#intro"); if(old) old.remove();
   const el = document.createElement("div"); el.id = "intro"; el.setAttribute("aria-hidden","true");
-  el.innerHTML = `<div class="glow"></div><div class="lampx"><svg viewBox="0 0 24 24"><path class="base" d="M4 14h16l-2 3H6zM8 18h8l-1 3H9z"/><path class="flame" d="M12 3c1.2 2 3 3.2 3 5.2A3 3 0 0 1 12 11a3 3 0 0 1-3-2.8C9 6.2 10.8 5 12 3z"/><path class="core" d="M12 6.4c.6 1 1.4 1.6 1.4 2.6a1.4 1.4 0 0 1-2.8 0c0-1 .8-1.6 1.4-2.6z"/></svg></div><div class="word">Ner</div><div class="fill"></div>`;
+  el.innerHTML = `<div class="glow"></div><div class="lampx"><svg viewBox="0 0 24 24"><path class="base" d="M4 14h16l-2 3H6zM8 18h8l-1 3H9z"/><path class="flame" d="M12 3c1.2 2 3 3.2 3 5.2A3 3 0 0 1 12 11a3 3 0 0 1-3-2.8C9 6.2 10.8 5 12 3z"/><path class="core" d="M12 6.4c.6 1 1.4 1.6 1.4 2.6a1.4 1.4 0 0 1-2.8 0c0-1 .8-1.6 1.4-2.6z"/></svg></div><div class="word">Ner</div><div class="word sub">«lámpara» en hebreo · <bdi lang="he">נֵר</bdi></div><div class="fill"></div>`;
   document.body.appendChild(el);
   introSound();
   let done = false;
